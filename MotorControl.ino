@@ -16,7 +16,7 @@ Servo leftMotor;           //Back Left Motor Servo Object
 
 int rightPin = 5;      //Back Right Motor pin
 int rightSpeed = Speed; //Back Right Motor starting speed
-Servo backRightMotor;           //Back Right Motor Servo Object
+Servo rightMotor;           //Back Right Motor Servo Object
 
 
 void setup()
