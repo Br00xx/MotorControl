@@ -10,6 +10,7 @@
 
 int Speed = 1460;           //Starting speed for Serial communication
 
+//WHICH PINS ARE BEING USED????
 int leftPin = 7;      //Back Left Motor pin
 int leftSpeed = Speed; //Back Left Motor starting speed
 Servo leftMotor;           //Back Left Motor Servo Object
@@ -18,12 +19,15 @@ int rightPin = 5;      //Back Right Motor pin
 int rightSpeed = Speed; //Back Right Motor starting speed
 Servo rightMotor;           //Back Right Motor Servo Object
 
+int dropBoxPin = 10;
+Servo dropBox;
 
 void setup()
 {
   // Tells each of the servo objects which pin it should output to
   leftMotor.attach(leftPin);
   rightMotor.attach(rightPin);
+  dropBox.attach(dropBoxPin);
 
   Serial.begin(115200);
 }
@@ -35,21 +39,21 @@ void loop()
   // FORMAT Example: fr 2000
   // FORMAT Example: a 1500
 
-  // If you send the character "a" then all the motors will run at the provided speed
+  // NEED TO RECEIVE PHRASES FOR THE DIRECTION AND POWER ON THAT DIRECTION
   // fr -> front right
   // fl -> front left
   // br -> back right
   // bl -> back left
   if (Serial.available() > 0) {
-    char fb = Serial.read();
-    if (fb == 'a') {
+    char instructions = Serial.read();
+    if (instructions == 'a') {
       Speed = Serial.parseInt();
       leftSpeed = rightSpeed = Speed;
     }
     else {
       char lr = Serial.read();
       Speed = Serial.parseInt();
-      if (fb == 'b') {
+      if (instructions == 'b') {
         if (lr == 'l') {
           leftSpeed = Speed;
         }
@@ -66,6 +70,10 @@ void loop()
         }
       }
     }
+    
+    //TO BE DONE.....
+    //NEED TO DETERMINE WHEN TO ACTIVATE AND DISABLE THE SOLENOID
+    
     Serial.println(Speed);
   }
   
