@@ -8,31 +8,22 @@
 
 #include <Servo.h>
 
-int backLeftPin = 7;      //Back Left Motor pin
-int backLeftSpeed = 1460; //Back Left Motor starting speed
-Servo backLeftMotor;           //Back Left Motor Servo Object
+int Speed = 1460;           //Starting speed for Serial communication
 
-int frontLeftPin = 6;      //Front Left Motor pin
-int frontLeftSpeed = 1460; //Front Left Motor starting speed
-Servo frontLeftMotor;           //Front Left Motor Servo Object
+int leftPin = 7;      //Back Left Motor pin
+int leftSpeed = Speed; //Back Left Motor starting speed
+Servo leftMotor;           //Back Left Motor Servo Object
 
-int backRightPin = 5;      //Back Right Motor pin
-int backRightSpeed = 1460; //Back Right Motor starting speed
+int rightPin = 5;      //Back Right Motor pin
+int rightSpeed = Speed; //Back Right Motor starting speed
 Servo backRightMotor;           //Back Right Motor Servo Object
 
-int frontRightPin = 4;      //Front Right Motor pin
-int frontRightSpeed = 1460; //Front Right Motor starting speed
-Servo frontRightMotor;           //Front Right Motor Servo Object
-
-int Speed = 1460;           //Starting speed for Serial communication
 
 void setup()
 {
   // Tells each of the servo objects which pin it should output to
-  backLeftMotor.attach(backLeftPin);
-  frontLeftMotor.attach(frontLeftPin);
-  backRightMotor.attach(backRightPin);
-  frontRightMotor.attach(frontRightPin);
+  leftMotor.attach(leftPin);
+  rightMotor.attach(rightPin);
 
   Serial.begin(115200);
 }
@@ -53,25 +44,25 @@ void loop()
     char fb = Serial.read();
     if (fb == 'a') {
       Speed = Serial.parseInt();
-      backLeftSpeed = frontLeftSpeed = backRightSpeed = frontRightSpeed = Speed;
+      leftSpeed = rightSpeed = Speed;
     }
     else {
       char lr = Serial.read();
       Speed = Serial.parseInt();
       if (fb == 'b') {
         if (lr == 'l') {
-          backLeftSpeed = Speed;
+          leftSpeed = Speed;
         }
         else {
-          backRightSpeed = Speed;
+          rightSpeed = Speed;
         }
       }
       else {
         if (lr == 'l') {
-          frontLeftSpeed = Speed;
+          leftSpeed = Speed;
         }
         else {
-          frontRightSpeed = Speed;
+          rightSpeed = Speed;
         }
       }
     }
@@ -79,12 +70,8 @@ void loop()
   }
   
   //This code creates the PWM signal on each pin based on the speed provided
-  backLeftMotor.writeMicroseconds(backLeftSpeed);           //Back left motor driver code
+  leftMotor.writeMicroseconds(leftSpeed);           //Back left motor driver code
 
-  frontLeftMotor.writeMicroseconds(frontLeftSpeed);          //Back right motor driver code
-
-  backRightMotor.writeMicroseconds(backRightSpeed);          //Front left motor driver code
-
-  frontRightMotor.writeMicroseconds(frontRightSpeed);         //Front right motor driver code
+  rightMotor.writeMicroseconds(rightSpeed);          //Front left motor driver code
 
 }
