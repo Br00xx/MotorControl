@@ -11,40 +11,34 @@ void motorControl()
   // br -> back right
   // bl -> back left
   if (Serial.available() > 0) {
-    char fb = Serial.read();
-    if (fb == 'a') {
+    char instructions = Serial.read();
+    if (instructions == 'a') {
       Speed = Serial.parseInt();
-      backLeftSpeed = frontLeftSpeed = backRightSpeed = frontRightSpeed = Speed;
+      leftSpeed = rightSpeed = Speed;
     }
     else {
       char lr = Serial.read();
       Speed = Serial.parseInt();
-      if (fb == 'b') {
+      if (instructions == 'b') {
         if (lr == 'l') {
-          backLeftSpeed = Speed;
+          leftSpeed = Speed;
         }
         else {
-          backRightSpeed = Speed;
+          rightSpeed = Speed;
         }
       }
       else {
         if (lr == 'l') {
-          frontLeftSpeed = Speed;
+          leftSpeed = Speed;
         }
         else {
-          frontRightSpeed = Speed;
+          rightSpeed = Speed;
         }
       }
     }
-    Serial.println(Speed);
-  }
   
   //This code creates the PWM signal on each pin based on the speed provided
-  backLeftMotor.writeMicroseconds(backLeftSpeed);           //Back left motor driver code
+  leftMotor.writeMicroseconds(leftSpeed);           //Back left motor driver code
 
-  frontLeftMotor.writeMicroseconds(frontLeftSpeed);          //Back right motor driver code
-
-  backRightMotor.writeMicroseconds(backRightSpeed);          //Front left motor driver code
-
-  frontRightMotor.writeMicroseconds(frontRightSpeed);         //Front right motor driver code
+  rightMotor.writeMicroseconds(rightSpeed);          //Front left motor driver code
 }
