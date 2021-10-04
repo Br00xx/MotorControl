@@ -20,30 +20,22 @@ double cumError, rateError;
 
 int solenoidPin = 1;      //Solenoid that controls the latch
 
-int backLeftPin = 7;      //Back Left Motor pin
-int backLeftSpeed = 1460; //Back Left Motor starting speed
-Servo backLeftMotor;           //Back Left Motor Servo Object
-
-int frontLeftPin = 6;      //Front Left Motor pin
-int frontLeftSpeed = 1460; //Front Left Motor starting speed
-Servo frontLeftMotor;           //Front Left Motor Servo Object
-
-int backRightPin = 5;      //Back Right Motor pin
-int backRightSpeed = 1460; //Back Right Motor starting speed
-Servo backRightMotor;           //Back Right Motor Servo Object
-
-int frontRightPin = 4;      //Front Right Motor pin
-int frontRightSpeed = 1460; //Front Right Motor starting speed
-Servo frontRightMotor;           //Front Right Motor Servo Object
-
 int Speed = 1460;           //Starting speed for Serial communication
+
+//WHICH PINS ARE BEING USED????
+int leftPin = 7;      //Back Left Motor pin
+int leftSpeed = Speed; //Back Left Motor starting speed
+Servo leftMotor;           //Back Left Motor Servo Object
+
+int rightPin = 5;      //Back Right Motor pin
+int rightSpeed = Speed; //Back Right Motor starting speed
+Servo rightMotor;           //Back Right Motor Servo Object
+
 
 void setup(){
   // Tells each of the servo objects which pin it should output to
-  backLeftMotor.attach(backLeftPin);
-  frontLeftMotor.attach(frontLeftPin);
-  backRightMotor.attach(backRightPin);
-  frontRightMotor.attach(frontRightPin);
+  leftMotor.attach(leftPin);
+  rightMotor.attach(rightPin);
 
   //Tells which pin controls the solenoid for the deposition system
   pinMode(solenoidPin, OUTPUT);
