@@ -41,4 +41,5 @@ void motorControl()
   leftMotor.writeMicroseconds(leftSpeed);           //Back left motor driver code
 
   rightMotor.writeMicroseconds(rightSpeed);          //Front left motor driver code
+  }
 }
