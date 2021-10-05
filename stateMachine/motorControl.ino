@@ -1,3 +1,5 @@
+
+
 void motorControl()
 {
   // This code is used when controlling using serial
@@ -38,8 +40,7 @@ void motorControl()
     }
   
   //This code creates the PWM signal on each pin based on the speed provided
-  leftMotor.writeMicroseconds(leftSpeed);           //Back left motor driver code
-
-  rightMotor.writeMicroseconds(rightSpeed);          //Front left motor driver code
+  analogWrite(leftPin, leftSpeed);           //Back left motor driver code
+  analogWrite(rightPin, rightSpeed);          //Front left motor driver code
   }
 }

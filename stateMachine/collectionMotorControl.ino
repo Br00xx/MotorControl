@@ -1,3 +1,15 @@
+//PID constants
+double kp = 2;
+double ki = 5;
+double kd = 1;
+ 
+unsigned long currentTime, previousTime;
+double elapsedTime;
+double error;
+double lastError;
+double input, output, setPoint;
+double cumError, rateError;
+
 void collectionMotorControl()
 {
   input = analogRead(A0);                //read from rotary encoder connected to A0
