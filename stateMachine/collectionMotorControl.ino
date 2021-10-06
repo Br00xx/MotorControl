@@ -10,7 +10,7 @@ double lastError;
 double input, output, setPoint;
 double cumError, rateError;
 
-void collectionMotorControl()
+void collectionMotorControl(uint8_t collectStatusR)
 {
   input = analogRead(A0);                //read from rotary encoder connected to A0
   output = computePID(input);

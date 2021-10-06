@@ -1,10 +1,14 @@
-void depositionControl()
+void depositionControl(uint8_t depositStatusR)
 {
-  if (true)
+  if (depositStatusR == 1)
   {
-  digitalWrite(solenoidPin, HIGH);      //Switch Solenoid ON
-  delay(1000);                          //Wait 1 Second
-  digitalWrite(solenoidPin, LOW);       //Switch Solenoid OFF
-  delay(1000); 
+    digitalWrite(solDepositionPin, HIGH);      //Switch Solenoid ON
+    depositStatusS = 1;
+    delay(1000); 
+  }
+  else {
+    digitalWrite(solDepositionPin, LOW);       //Switch Solenoid OFF
+    depositStatusS = 0;
+    delay(1000); 
   }
 }
