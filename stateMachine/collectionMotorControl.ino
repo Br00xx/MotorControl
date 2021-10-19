@@ -12,7 +12,14 @@ double cumError, rateError;
 
 void collectionMotorControl(uint8_t collectStatusR)
 {
-  input = analogRead(A0);                //read from rotary encoder connected to A0
+  //input = analogRead(A0);                //read from rotary encoder connected to A0
+  durationSigA = pulseIn(48, HIGH);
+  durationSigB = pulseIn(47, HIGH);
+  //calculate current RPM //
+  // 7 = pulse per rotation
+  // 60:1 = gear ratio
+  input = (60000000/((durationSigA+durationSigB) *7*60*2));
+ 
   output = computePID(input);
   delay(100);
   analogWrite(3, output);                //control the motor based on PID value
